@@ -1437,6 +1437,77 @@ img.emoji {
 	
 
 </div>
+
+<style>
+  .clac {
+    display: block;
+  }
+  .calc-body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 20px;
+  }
+  .calc-container {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  .calc-header {
+    text-align: center;
+    color: #1aa7ca;
+  }
+  .calc-label {
+    display: block;
+    margin: 10px 0 5px;
+  }
+  .calc-input, .calc-select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px; /* Увеличен размер текста для ввода */
+  }
+  .calc-button {
+    width: 100%;
+    padding: 10px;
+    background-color: #1aa7ca;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  .calc-button:hover {
+    background-color: #188da3;
+  }
+  .calc-result {
+    margin-top: 20px;
+    font-size: 18px;
+    text-align: center;
+  }
+
+  /* Медиа-запрос для адаптивности */
+  @media (max-width: 600px) {
+    .calc-container {
+      padding: 15px;
+    }
+    .calc-input, .calc-select {
+      font-size: 14px;
+      padding: 8px;
+    }
+    .calc-header {
+      font-size: 20px;
+    }
+    .calc-button {
+      font-size: 16px;
+      padding: 8px;
+    }
+  }
+</style>
+
 <div class="clac">
   <div class="calc-container">
     <h2 class="calc-header">Калькулятор стоимости решеток</h2>
@@ -1445,7 +1516,7 @@ img.emoji {
     <input type="number" id="height" class="calc-input" placeholder="Введите высоту окна в сантиметрах" required>
 
     <label for="width" class="calc-label">Ширина окна (см):</label>
-    <input type="number" id="width" class="calc-input" placeholder="Введите ширину окна в сантиметрах (без добавления 4 см)" required>
+    <input type="number" id="width" class="calc-input" placeholder="Введите ширину окна в сантиметрах " required>
 
     <label for="type" class="calc-label">Тип решетки:</label>
     <select id="type" class="calc-select" required>
@@ -1457,8 +1528,10 @@ img.emoji {
     <button class="calc-button" onclick="calculatePrice()">Рассчитать стоимость</button>
 
     <div class="calc-result" id="result"></div>
+  </div>
 </div>
-</div>
+
+
 		</div>
 
 		
@@ -1502,17 +1575,17 @@ img.emoji {
 	<div id="gap-1527357861" class="gap-element clearfix" style="display:block; height:auto;">
 		<script>
       function calculatePrice() {
-              let height = parseFloat(document.getElementById('height').value);
+          let height = parseFloat(document.getElementById('height').value);
           let width = parseFloat(document.getElementById('width').value);
           let type = document.getElementById('type').value;
-  
-
+    
+          // Добавляем 4 см к ширине
           let adjustedWidth = width + 4;
-  
-   
+    
+          // Вычисляем площадь окна в квадратных метрах
           let area = (height * adjustedWidth) / 10000;
-  
-
+    
+          // Определяем цену за квадратный метр
           let pricePerSqM;
           if (type === '4mm') {
               pricePerSqM = 29000;
@@ -1521,17 +1594,18 @@ img.emoji {
           } else if (type === 'antivandal') {
               pricePerSqM = 36000;
           }
-  
-
+    
+          // Рассчитываем итоговую стоимость
           let totalPrice = area * pricePerSqM;
-  
-       
+    
+          // Форматируем результат для отображения с пробелами
           document.getElementById('result').innerHTML = 
               `Ширина окна с добавлением 4 см: ${adjustedWidth} см<br> 
               Площадь окна: ${area.toFixed(2)} м²<br>
-              Итоговая стоимость: ${totalPrice.toFixed(2)} тнг`;
+              Итоговая стоимость: ${Math.round(totalPrice).toLocaleString('ru-RU')} тнг`;
       }
-  </script>
+    </script>
+    
 <style>
 #gap-1527357861 {
   padding-top: 38px;
@@ -1542,57 +1616,6 @@ img.emoji {
 	
 
 
-<style>
-  .clac{
-    position: block;
-  }
-  .calc-body {
-      font-family: Arial, sans-serif;
-      background-color: #f4f4f4;
-      margin: 20px;
-  }
-  .calc-container {
-      max-width: 600px;
-      margin: 0 auto;
-      background-color: #fff;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-  .calc-header {
-      text-align: center;
-      color: #1aa7ca;
-  }
-  .calc-label {
-      display: block;
-      margin: 10px 0 5px;
-  }
-  .calc-input, .calc-select {
-      width: 100%;
-      padding: 10px;
-      margin-bottom: 15px;
-      border: 1px solid #ddd;
-      border-radius: 5px;
-  }
-  .calc-button {
-      width: 100%;
-      padding: 10px;
-      background-color: #1aa7ca;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-  }
-  .calc-button:hover {
-      background-color: #1aa7ca;
-  }
-  .calc-result {
-      margin-top: 20px;
-      font-size: 18px;
-      text-align: center;
-  }
-
-</style>
 
 <h3><span data-text-=""><strong>Закажите бесплатный замер </strong></span></h3>
 <p>Заказать надежные защитные решетки от нашего завода-изготовителя Ladom можно у нас на сайте прямо сейчас или в салонах официальных дилеров.</p>
